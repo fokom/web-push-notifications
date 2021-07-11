@@ -2,21 +2,21 @@ const webPush = require('web-push');
 const faker = require('faker');
 
 const pushSubscription = {
-    "endpoint": "https://fcm.googleapis.com/fcm/send/cgpM2kf-o9I:APA91bGsFxoaA-YvOzeMUtmn3BIiWotLkpU3cwZNXOOBNGUJ9e1U6IIHd-oLnsgxFnW2GH6UnBeiXflxPUXmkBl_kk_vkL-oUHMFAOEwKUUsA4Zr9x8x6G9Weu9OnGIW94lJw5YEHYDc",
+    "endpoint": "https://fcm.googleapis.com/fcm/send/fbq1fLsnQW8:APA91bH8rBJLHJ_6dx7tIgCosZKkgWwgdGNe5PEDUWt--FKY9H-UdtpVkTA3YKftEMYAGAPtkjsNxjYdZvxSlqQR9OO0FcPk57D39mgpp_EXpogOedo3wSIUqqb08GvoH86PgSfm8LBQ",
     "expirationTime": null,
     "keys": {
-        "p256dh": "BCUxEO-k-xwq8TzNYrvVbvMGjJS2tEQWfZCt6pvbN1OznFSxdTbFCGOgcNfpVWo2imU8ybRamYKz5xVUCJs43do",
-        "auth": "JutsLAPMx6UcqHQrRkm6JQ"
+        "p256dh": "BO0WAggmb3HwbXRb5S1Xs1F21sZG6S3YOe1-VFre8XC6t2QT6Fj2tkGrT3VRfNUEHuP7RaVZ9zxK0kILNL3ipio",
+        "auth": "PoC_a_VxDx86RqVnR8kElw"
     }
 }
 
-const vapidPublicKey = 'BBjDHF8cFoJznds83RrbZByg-UQCxWTNb9afVNjxjbpIsj2CaJyKDrndm9GwHk9Tbargfzt83gYprv9kl1OvIEU';
-const vapidPrivateKey = 'j1bKaA0HcYpB58PW3Ho2wg2WcK7raVplzN7zGo3Pnfw';
+const vapidPublicKey = 'BEpKf2mbAg_uXFp5ybLo3Vz-C7HtBxnx9SRlx0KOzj6lnh7rS-rgWHhYVDyF-cJbF3hTg6lsHSLVhHQEb48V6-M';
+const vapidPrivateKey = 'rRSdqOwwLhvw9OYiD4bBeTHpn8TiToff50_0-D1JyfU';
 
 const options = {
     TTL: 60,
     vapidDetails: {
-        subject: 'mailto: pushers@pushy.com',
+        subject: 'mailto: research.ciffer@gmail.com',
         publicKey: vapidPublicKey,
         privateKey: vapidPrivateKey
     }
@@ -31,14 +31,17 @@ const notify = (subscribers) => {
     }
 
     subscribers.forEach((subscriber, id) => {
+
         webPush.sendNotification(
-                subscriber,
-                JSON.stringify(transaction),
-                options
-            )
-            .then(() => console.log(`${subscribers.size} subscribers notified.`))
-            .catch(error => console.error('Error in pushing notification', error))
-    })
+            subscriber,
+            JSON.stringify(transaction),
+            options
+        )
+        .then(() => console.log(`${subscribers.size} subscribers notified.`))
+        .catch(error => console.error('Error in pushing notification', error))
+
+    });
+        
 }
 
 module.exports = {

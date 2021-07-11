@@ -22,7 +22,7 @@ const client = (() => {
                 ],
                 data: {
                     notificationTime: Date.now(),
-                    githubUser: "hhimanshu"
+                    githubUser: "fokom"
                 }
             }
             reg.showNotification('Second Notification', options)
@@ -83,6 +83,7 @@ const client = (() => {
     }
 
     const setupPush = () => {
+        isUserSubscribed = false
         function urlB64ToUint8Array(url) {
             const padding = '='.repeat((4 - url.length % 4) % 4);
             const base64 = (url + padding)
@@ -109,8 +110,8 @@ const client = (() => {
         }
 
         const subscribeUser = () => {
-            const appServerPublicKey = "BBjDHF8cFoJznds83RrbZByg-UQCxWTNb9afVNjxjbpIsj2CaJyKDrndm9GwHk9Tbargfzt83gYprv9kl1OvIEU";
-            const publicKeyAsArray = urlB64ToUint8Array(appServerPublicKey)
+            const appServerPublicKey = "BEpKf2mbAg_uXFp5ybLo3Vz-C7HtBxnx9SRlx0KOzj6lnh7rS-rgWHhYVDyF-cJbF3hTg6lsHSLVhHQEb48V6-M";
+            const publicKeyAsArray = urlB64ToUint8Array(appServerPublicKey);
 
             serviceWorkerRegObj.pushManager.subscribe({
                     userVisibleOnly: true,
@@ -118,7 +119,7 @@ const client = (() => {
                 })
                 .then(subscription => {
                     console.log(JSON.stringify(subscription, null, 4))
-                    subscribeWithServer(subscription)
+                    subscribeWithServer(subscription);
                     disablePushNotificationButton();
                 })
                 .catch(error => console.error("Failed to subscribe to Push Service.", error))
@@ -140,7 +141,7 @@ const client = (() => {
                 .then(subscription => {
                     if (subscription) {
                         let subAsString = JSON.stringify(subscription);
-                        let subAsObject = JSON.parse(subAsString)
+                        let subAsObject = JSON.parse(subAsString);
                         unsubscribeWithServer(subAsObject.keys.auth)
                         return subscription.unsubscribe()
                     }
@@ -150,8 +151,11 @@ const client = (() => {
         }
 
         pushButton.addEventListener('click', () => {
-            if (isUserSubscribed) unSubscribeUser()
-            else subscribeUser();
+            if(isUserSubscribed) {
+                unSubscribeUser();
+            } else {
+                subscribeUser();
+            }
         })
     }
     setupPush()

@@ -1,4 +1,4 @@
-## Prerequisites
+  ## Prerequisites
 
 ### Install `nvm`
 This project requires the LTS version of Node. If you have another version installed, you can best manage them using Node Version Manager (nvm)
